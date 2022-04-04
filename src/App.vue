@@ -1,7 +1,6 @@
 <template>
   <section class="container">
-    <h2>{{ userName }}</h2>
-    <h3>{{ userAge }}</h3>
+    <user-data :first-name="firstName" :last-name="lastName" :age="userAge"></user-data>
     <button @click="newAge">Change</button>
     <!-- <br />
     <input type="text" @input="setFirstName" />
@@ -10,6 +9,7 @@
     <br />
     <input type="text" v-model="firstName" />
     <br />
+    <!-- dùng ref để lấy dữ liệu từ ô input, nó là ràng buộc 1 chiều, không như v-model là ràng buộc hai chiều -->
     <input type="text" ref="lastNameInput" />
     <button @click="setLastName">Set Last Name</button>
   </section>
@@ -17,12 +17,17 @@
 
 <script>
 import { computed, ref, watch } from 'vue';
+import UserData from './components/UserData.vue';
 
 export default {
+  components: {
+    UserData,
+  },
   setup() {
     // const uName = ref('Maximilian');
     const uAge = ref(31);
     const lastName = ref('');
+    // khai báo ref
     const lastNameInput = ref(null);
     const firstName = ref('');
     // const user = reactive({
@@ -54,6 +59,7 @@ export default {
     }
 
     function setLastName() {
+      // do dữ liệu ở input được lưu vào một hằng số nên muốn truy cập nó thì dùng lastNameInput.value.value;
       lastName.value = lastNameInput.value.value;
     }
 
@@ -86,8 +92,9 @@ export default {
       // setFirstName,
       // setLastName,
       firstName,
+      lastName,
       lastNameInput,
-      setLastName
+      setLastName,
     };
   },
   // data() {
