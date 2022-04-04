@@ -1,6 +1,6 @@
 <template>
   <section class="container">
-    <user-data :first-name="firstName" :last-name="lastName" :age="userAge"></user-data>
+    <user-data :first-name="firstName" :last-name="lastName"></user-data>
     <button @click="newAge">Change</button>
     <!-- <br />
     <input type="text" @input="setFirstName" />
@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import { computed, ref, watch } from 'vue';
+import { computed, ref, watch, provide } from 'vue';
 import UserData from './components/UserData.vue';
 
 export default {
@@ -34,6 +34,9 @@ export default {
     //   name: 'Maximilian',
     //   age: 31,
     // });
+
+    // provide sẽ nhận hai tham số, cái đầu tiên sẽ là tên của nó do ta quyết định, cái thứ hai sẽ là giá trị muốn cung cấp
+    provide('userAge', uAge);
 
     // watch sẽ thực thi khi uAge thay đổi
     // uAge ở đây là giá trị trước khi thay đổi
